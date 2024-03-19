@@ -36,12 +36,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void update(Task task, long id ) throws TaskNotFoundException {
+    public void update(Task task, long id) throws TaskNotFoundException {
         Task existingTask = repository.findById(id).orElseThrow(() -> new TaskNotFoundException(task.getId()));
         existingTask.setDetails(task.getDetails());
         existingTask.setEndDate(task.getEndDate());
         existingTask.setShortDesc(task.getShortDesc());
         existingTask.setStartDate(task.getStartDate());
+        existingTask.setGroup(task.getGroup());
         repository.save(existingTask);
     }
 
@@ -60,6 +61,11 @@ public class TaskServiceImpl implements TaskService {
         repository.deleteAll();
     }
 
+    @Override
+    public List<Task> getTasksByGroup(long taskId) {
+
+        return repository.findByGroupId(taskId);
+    }
 
 
 }

@@ -1,5 +1,7 @@
 package com.swedbank.StudentApplication.group;
 
+import com.swedbank.StudentApplication.task.Task;
+import com.swedbank.StudentApplication.task.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,44 +18,52 @@ public class GroupController {
     private static final Logger log = LoggerFactory.getLogger(GroupController.class);
 
     private final GroupService service;
+    private final TaskService taskService;
 
-    public GroupController(GroupService service){
+    public GroupController(GroupService service, TaskService taskService) {
         this.service = service;
+        this.taskService = taskService;
     }
 
     @GetMapping
-    public ResponseEntity<List<Group>> getAllGroups(){
+    public ResponseEntity<List<Group>> getAllGroups() {
         List<Group> groups = service.findAll();
         return new ResponseEntity<List<Group>>(groups, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Group> getGroupByid(@PathVariable final long id){
-        Group group  = service.findById(id);
+    public ResponseEntity<Group> getGroupByid(@PathVariable final long id) {
+        Group group = service.findById(id);
         return new ResponseEntity<>(group, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Group> createGroup(@RequestBody final Group group){
+    public ResponseEntity<Group> createGroup(@RequestBody final Group group) {
         Group savedGroup = service.save(group);
         return new ResponseEntity<>(savedGroup, HttpStatus.CREATED);
     }
 
     @PatchMapping
-    public ResponseEntity<Group> updateGroup(@RequestBody final Group group){
+    public ResponseEntity<Group> updateGroup(@RequestBody final Group group) {
         Group updateGroup = service.update(group);
         return new ResponseEntity<>(updateGroup, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteGroup(@PathVariable final long id){
+    public ResponseEntity<Void> deleteGroup(@PathVariable final long id) {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteAllGroups(){
+    public ResponseEntity<Void> deleteAllGroups() {
         service.deleteAll();
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("{id}/tasks")
+    public ResponseEntity<List<Task>> getTasksByGroup(@PathVariable final long id) {
+        List<Task> tasks = taskService.getTasksByGroup(id);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 }

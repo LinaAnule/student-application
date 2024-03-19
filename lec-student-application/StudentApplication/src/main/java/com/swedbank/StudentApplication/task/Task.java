@@ -46,12 +46,12 @@ public class Task {
     @Column(name = "end_date")
     private Date endDate;
 
-//    @ManyToOne
-//    @JoinColumn(name = "group_id", nullable = true)
-//    @JsonIgnore
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    private Group group;
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = true)
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Group group;
 
     /**
      * Instantiates a new task.

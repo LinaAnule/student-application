@@ -18,4 +18,6 @@ public interface TaskService {
     void delete(long id) throws TaskNotFoundException;
 
     void deleteAll();
+
+    List<Task> getTasksByGroup(long taskId);
 }

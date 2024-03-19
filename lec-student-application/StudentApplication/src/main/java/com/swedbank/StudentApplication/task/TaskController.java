@@ -10,7 +10,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("api/tasks")
 public class TaskController {
-    private TaskService taskService;
+    private final TaskService taskService;
 
     @Autowired
     public TaskController(TaskService taskService) {
@@ -31,5 +31,11 @@ public class TaskController {
     public void createTask(@RequestBody Task task) {
         taskService.save(task);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteTask(@PathVariable long id) {
+        taskService.delete(id);
+    }
+
 
 }

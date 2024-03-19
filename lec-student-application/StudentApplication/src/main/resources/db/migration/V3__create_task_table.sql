@@ -4,10 +4,12 @@ CREATE TABLE task (
                       short_desc varchar(255) not null,
                       details text,
                       start_date TIMESTAMP not null,
-                      end_date TIMESTAMP
+                      end_date TIMESTAMP,
+                      group_id BIGINT,
+                      FOREIGN KEY (group_id) REFERENCES "group" (id)
 );
 
 create sequence task_sequence start with 2 increment by 1;
 
-INSERT INTO task ( short_desc, details, start_date, end_date)
-    values('Live your life', 'complete by the end of time','2012-12-12 00:01', '2012-12-21 12:12' );
+INSERT INTO task ( short_desc, details, start_date, end_date, group_id)
+    values('Live your life', 'complete by the end of time','2012-12-12 00:01', '2012-12-21 12:12', 1 );
