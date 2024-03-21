@@ -43,8 +43,7 @@ public class PersonServiceImpl  implements  PersonService {
         existingPerson.setSurname(person.getSurname());
         existingPerson.setPhone(person.getPhone());
         existingPerson.setEmail(person.getEmail());
-        Person updatedPerson = repository.save(existingPerson);
-        return  updatedPerson;
+        return repository.save(existingPerson);
     }
 
     @Override

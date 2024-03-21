@@ -10,7 +10,9 @@ CREATE TABLE "group"
 create sequence group_sequence start with 1 increment by 1;
 
 insert into "group" (name, details)
-values ('Test Group', 'This is test group');
+VALUES ('CodeCrafters', 'Group of coding enthusiasts learning together at bootcamp'),
+       ('DataExplorers', 'Data analysis and visualization group attending data science bootcamp'),
+       ('WebWarriors', 'Web development group honing their skills in a bootcamp environment');
 
 --Person group relation table
 CREATE TABLE person_group
@@ -20,4 +22,8 @@ CREATE TABLE person_group
 );
 
 insert into person_group (pid, group_id)
-values (38203020577, 1);
+values (39001234567, 1),
+       (49001123456, 2),
+       (69002234567, 2),
+       (49002345678, 3),
+       (59003456789, 3);

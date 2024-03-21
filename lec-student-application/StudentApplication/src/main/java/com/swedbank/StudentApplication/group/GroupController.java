@@ -66,4 +66,6 @@ public class GroupController {
         List<Task> tasks = taskService.getTasksByGroup(id);
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
+
+
 }

@@ -33,17 +33,17 @@ public class PersonController {
 
     @GetMapping(produces = "application/json")
     @Value("${value.from.file}")
-    ResponseEntity<List<Person>> getAllPersons() {
+    public ResponseEntity<List<Person>> getAllPersons() {
         List<Person> list = service.getAll();
         log.info("Collection size is " + list.size() );
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("{pid}")
-    ResponseEntity<Person> getByPid(@PathVariable("pid") Long pid)
+    public ResponseEntity<Person> getByPid(@PathVariable("pid") Long pid)
             throws PersonNotFoundException {
         Person person = service.getById(pid);
-        return new ResponseEntity<Person>(person, HttpStatus.OK);
+        return new ResponseEntity<>(person, HttpStatus.OK);
 
     }
 
